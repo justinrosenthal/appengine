@@ -393,7 +393,7 @@ func (c *context) WriteHeader(code int) {
 }
 
 type RequestCanceller interface {
-	CancelRequest(*Request)
+	CancelRequest(*http.Request)
 }
 
 func (c *context) post(body []byte, timeout time.Duration) (b []byte, err error) {
