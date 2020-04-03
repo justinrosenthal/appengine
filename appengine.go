@@ -54,6 +54,14 @@ func Main() {
 	internal.Main()
 }
 
+func GetAPIHTTPClient() *http.Client {
+	return internal.GetAPIHTTPClient()
+}
+
+func SetAPIHTTPClient(c *http.Client) {
+	internal.SetAPIHTTPClient(c)
+}
+
 // IsDevAppServer reports whether the App Engine app is running in the
 // development App Server.
 func IsDevAppServer() bool {

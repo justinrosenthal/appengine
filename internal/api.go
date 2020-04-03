@@ -72,6 +72,14 @@ var (
 	backgroundContext     netcontext.Context
 )
 
+func GetAPIHTTPClient() *http.Client {
+	return apiHTTPClient
+}
+
+func SetAPIHTTPClient(c *http.Client) {
+	apiHTTPClient = c
+}
+
 func apiURL() *url.URL {
 	host, port := "appengine.googleapis.internal", "10001"
 	if h := os.Getenv("API_HOST"); h != "" {
