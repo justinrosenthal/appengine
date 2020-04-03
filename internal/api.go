@@ -392,6 +392,10 @@ func (c *context) WriteHeader(code int) {
 	c.outCode = code
 }
 
+type RequestCanceller interface {
+	CancelRequest(*Request)
+}
+
 func (c *context) post(body []byte, timeout time.Duration) (b []byte, err error) {
 	hreq := &http.Request{
 		Method: "POST",
@@ -413,7 +417,7 @@ func (c *context) post(body []byte, timeout time.Duration) (b []byte, err error)
 		hreq.Header.Set(traceHeader, info)
 	}
 
-	tr := apiHTTPClient.Transport.(*http.Transport)
+	tr := apiHTTPClient.Transport.(RequestCanceller)
 
 	var timedOut int32 // atomic; set to 1 if timed out
 	t := time.AfterFunc(timeout, func() {
